@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Build static site
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          test -n "$SUPABASE_URL" || (echo "Missing repository variable SUPABASE_URL" && exit 1)
+          test -n "$SUPABASE_PUBLISHABLE_KEY" || (echo "Missing repository variable SUPABASE_PUBLISHABLE_KEY" && exit 1)
+          mkdir -p dist
+          cp index.html styles.css app.js dist/
+          node -e 'const fs=require("fs"); const cfg={supabaseUrl:process.env.SUPABASE_URL,publishableKey:process.env.SUPABASE_PUBLISHABLE_KEY}; fs.writeFileSync("dist/site-config.js", "window.APP_CONFIG = "+JSON.stringify(cfg)+";\n");'
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+      - name: Deploy site
+        id: deployment
+        uses: actions/deploy-pages@v4
+
