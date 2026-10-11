@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f1ff" />
+  <meta name="description" content="如果职场闯关只能带一件道具，你会带什么？用24道情境题找到你的职场生存道具。" />
+  <title>你的职场生存道具是什么？</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar"><a class="brand" href="#home" aria-label="回到首页"><span class="brand-mark">✦</span>职场生存图鉴</a><span class="topbar-note">WORKPLACE SURVIVAL GUIDE</span></header>
+    <section id="home" class="view hero-view">
+      <div class="hero-card">
+        <div class="hero-emblem" aria-hidden="true">🧰</div>
+        <p class="eyebrow">WORKPLACE SURVIVAL KIT · VOL. 01</p>
+        <h1>你的职场生存<br /><span>道具是什么？</span></h1>
+        <p class="hero-desc">如果职场闯关只能带一件道具，你会带什么？<br />从 24 个真实工作场景里，找到你的生存装备。</p>
+        <div class="feature-grid">
+          <div class="feature"><b>🎧</b><strong>8 款道具</strong><span>找到你的应对风格</span></div>
+          <div class="feature"><b>🧭</b><strong>6 个维度</strong><span>读懂自己的职场策略</span></div>
+          <div class="feature"><b>📱</b><strong>随时分享</strong><span>生成专属结果长图</span></div>
+          <div class="feature"><b>⏱</b><strong>约 3 分钟</strong><span>没有标准答案</span></div>
+        </div>
+        <div class="intro-note"><strong>测评说明</strong><p>请按最近三个月的真实反应作答。你的选择会映射到边界、专注、协调、规则、影响与求助六种能力倾向。</p></div>
+        <form id="unlock-form" class="unlock-form">
+          <label for="access-code">输入体验密码</label>
+          <div class="code-row"><input id="access-code" type="password" autocomplete="off" placeholder="请输入测评密码" required /><button class="button button-primary" type="submit">开始测评 <span>→</span></button></div>
+          <p id="unlock-message" class="form-message" aria-live="polite">每个密码可完成 5 次测评</p>
+        </form>
+        <button class="text-button" id="how-score" type="button">了解测评如何匹配结果 <span>＋</span></button>
+        <div class="science-detail" id="science-detail" hidden><b>关于测评结果</b><p>题目围绕工作要求与资源、工作重塑、角色清晰、建言与社会支持等概念编写，用于自我觉察和互动分享；不是临床诊断或经过常模验证的招聘工具。</p></div>
+      </div>
+      <footer>一份让工作没那么难熬的小测评 <span>✦</span></footer>
+    </section>
+
+    <section id="quiz" class="view quiz-view" hidden>
+      <div class="quiz-heading"><span class="pill"><i></i>职场情境测评</span><button class="exit-button" id="quit-quiz" type="button">退出测评</button></div>
+      <div class="progress-card"><div class="progress-meta"><span id="dimension-label">🧭 边界与担当</span><span><b id="question-current">1</b> / 24 <em id="question-percent">4%</em></span></div><div class="progress-track"><div id="progress-fill"></div></div></div>
+      <article class="question-card"><div class="question-kicker" id="question-kicker">场景 01 · 边界与担当</div><h2 id="question-title"></h2><p class="question-hint">选择最接近你真实反应的一项</p><div id="answers" class="answers" role="radiogroup" aria-label="答案选项"></div><div class="quiz-controls"><button class="button button-quiet" id="previous-question" type="button">← 上一题</button><span id="answer-hint">选择后自动进入下一题</span><button class="button button-quiet" id="next-question" type="button" disabled>下一题 →</button></div></article>
+      <div class="quiz-footnote">不用选“最正确”的答案，真实的你才是这份测评想认识的人。</div>
+    </section>
+
+    <section id="result" class="view result-view" hidden>
+      <div class="result-topline"><button class="text-button" id="back-home" type="button">← 回到首页</button><span>YOUR SURVIVAL ARTIFACT</span></div>
+      <article id="result-card" class="result-card">
+        <div class="result-art-top"><span>职场生存图鉴</span><span>NO. <b id="result-number">01</b></span></div>
+        <div class="result-icon-wrap"><div id="result-icon" class="result-icon">🎧</div></div>
+        <p id="result-en" class="result-en">FOCUS & RECOVERY</p>
+        <h1>你的职场生存道具<br /><span id="result-name">降噪耳机</span></h1>
+        <p id="result-tagline" class="result-tagline"></p>
+        <div class="result-stats" id="result-stats"></div>
+        <div class="result-body">
+          <section class="result-section"><h3><span>✦</span> 你的职场超能力</h3><p id="result-power"></p></section>
+          <section class="result-section"><h3><span>↗</span> 你的隐藏优势</h3><p id="result-strength"></p></section>
+          <section class="result-section"><h3><span>◒</span> 需要留意的小弱点</h3><p id="result-pitfall"></p></section>
+          <section class="result-section skill-section"><h3><span>⌁</span> 可以解锁的技能</h3><p id="result-skill"></p><div class="practice"><b>下次遇到类似场景，试试这样说：</b><p id="result-practice"></p></div></section>
+          <section class="theory-note"><b>🧠 一点理论视角</b><p id="result-theory"></p></section>
+        </div>
+        <div class="result-card-footer"><span>结果仅供自我觉察与趣味分享</span><span>职场生存图鉴 ✦</span></div>
+      </article>
+      <div class="share-caption" id="share-caption"></div>
+      <div class="result-actions"><button id="save-image" class="button button-primary">保存结果长图 <span>↓</span></button><button id="copy-link" class="button button-secondary">复制结果链接 <span>↗</span></button><button id="retake" class="button button-quiet">再测一次 ↻</button><button id="review-gift" class="button button-gift">好评有礼 <span>♥</span></button></div>
+      <p class="save-hint" id="save-hint" aria-live="polite">手机可保存图片后长按存入相册；电脑端将下载 PNG 图片。</p>
+      <p class="result-disclaimer">本测评为互动内容，不用于招聘筛选、绩效评估或心理诊断。结果描述的是偏好倾向，不是固定人格标签。</p>
+    </section>
+    <div class="modal-backdrop" id="gift-modal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="gift-title"><button id="close-modal" class="modal-close" aria-label="关闭">×</button><div class="gift-icon">🎁</div><h2 id="gift-title">好评有礼，感谢支持</h2><p>如果这份测评给你带来了快乐，欢迎到店铺留下真实评价。完成后联系客服并发送好评截图，即可获得 <strong>1 元返现</strong>。</p><p class="modal-small">活动详情及返现方式请以店铺页面说明为准。感谢你的支持！</p><button class="button button-primary modal-done" id="modal-done">知道啦</button></section></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="./site-config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
+
